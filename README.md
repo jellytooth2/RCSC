@@ -1,125 +1,18 @@
 # RCSC
 Website for RCSC on pump.fun
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>RCSC | Reserve Currency of Social Commerce</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #87CEEB;
-}
+A single static page (`index.html`): a tongue-in-cheek "market sentiment" score for
+Springfield episodes. Votes are stored in the browser's `localStorage` — there is no
+backend, database, or API key involved.
 
-header {
-  background: #FFD90F;
-  padding: 20px;
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-}
+## Run locally
 
-.hero {
-  text-align: center;
-  padding: 30px;
-}
+```bash
+docker compose -f docker-compose.base44.yml up -d
+```
 
-.hero img {
-  width: 250px;
-}
+Then open http://localhost:3000.
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-button {
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  background: #FFD90F;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.score {
-  font-size: 2em;
-  text-align: center;
-  margin-top: 10px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #222;
-  color: white;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-RCSC — Reserve Currency of Social Commerce
-</header>
-
-<div class="hero">
-  <h1>Springfield Market Sentiment</h1>
-  <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png">
-  <p>Rate last night’s chaos like a market.</p>
-</div>
-
-<div class="container">
-
-<div class="card">
-  <h2>📊 Live RCSC Score</h2>
-  <div class="score" id="score">0</div>
-</div>
-
-<div class="card">
-  <h2>🔥 Rate the Episode</h2>
-  <button onclick="vote(5)">🚀 Bullish (+5)</button>
-  <button onclick="vote(2)">📈 Mild Pump (+2)</button>
-  <button onclick="vote(-2)">📉 Weak (-2)</button>
-  <button onclick="vote(-5)">💀 Rug Pull (-5)</button>
-</div>
-
-<div class="card">
-  <h2>💡 Top Moments (Simulated)</h2>
-  <ul>
-    <li>Homer makes a financially terrible decision</li>
-    <li>Springfield overreacts instantly</li>
-    <li>Everything escalates way too far</li>
-  </ul>
-</div>
-
-</div>
-
-<footer>
-RCSC © 2026 | Social Sentiment = Currency
-</footer>
-
-<script>
-let score = localStorage.getItem("rcscScore") || 0;
-document.getElementById("score").innerText = score;
-
-function vote(value) {
-  score = parseInt(score) + value;
-  localStorage.setItem("rcscScore", score);
-  document.getElementById("score").innerText = score;
-}
-</script>
-
-</body>
-</html>
+In the Base44 sandbox, `BASE44_PREVIEW_MODE=1` is passed through to the `web` service.
+The app needs no configuration keyed on it; shared behaviour is unchanged when the
+variable is unset.
